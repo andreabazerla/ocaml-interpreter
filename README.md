@@ -7,8 +7,8 @@
 * [Files](#files)
 * [Environment](#environment)
 * [Storage](#torage)
-* [Reflect](#reflect)
 * [Parser](#parser)
+* [Reflect](#reflect)
 * [Taint Analysis](#taint-analysis)
 * [Credits](#redits)
 * [License](#license)
@@ -18,16 +18,12 @@
 ![blueprint](https://raw.githubusercontent.com/andreabazerla/interpreter/master/doc/img/blueprint.png?token=AOHqU6dXQ8j7Tf9XbS_0spy8CWC3X38Zks5YvDCgwA%3D%3D)
 
 Our interpreter is written in Ocaml, characterized with an operational semantic and includes functions, block and procedures.
-We have a dynamic environment and a static environment. In our dymamic environment we associate identifiers with denotable values, in the static environment we associate a boolean value (true,false) with the type Tainted or Untainted.
-We use in our environment a static scoping,this means that in each point of the program the environment is identified by the lessical structures of the code.
+We have a dynamic enviroment and a static environment. In our dymamic enviroment we associate identifiers with denotable values, in the static enviroment we associate a boolean value (true,false) with the type Tainted or Untainted.
+We use in our enviroment a static scoping,this means that in each point of the program the enviroment is identified by the lessical structures of the code.
 In our dynamic domain each eval, dval, mval and tval type is a tuple: the first element is the value, the second is a boolean. If the last is true, the element is tainted, otherwise it is untainted.
 
-The new environment gives the possibility to make static analysis on the code of the interpreter.
-We have created a parser in order to include in our semantic the command Reflect.
-This command takes as input a string that contains a command list.
-Through the parser the string is evaluated in order to recreate the command list.
-If the reflect try to modify existing values in the store, our dynamic controll look into the taint of these values.
-If there are some tainted values an exception will be launched and the program will be terminated.
+The new environment gives the possibility to make static analysis on the code of the interpreter. We have created a parser in order to include in our semantic the command Reflect.
+This command takes as input a string that contains a command list. Through the parser the string is evaluated in order to recreate the command list. If the reflect try to modify existing values in the store, our dynamic controll look into the taint of these values. If there are some tainted values an exception will be launched and the program will be terminated.
 
 ## <a name="files">Files
 
@@ -49,11 +45,11 @@ If there are some tainted values an exception will be launched and the program w
 
     * **syntax.ml**: syntax of expressions, commands, etc.
 
-* **/test/**: directory about tests
+* **/test/**: folder about tests
 
-    * **library.ml**: library of tests to be executed in test.ml
+    * **library.ml**: library of tests to be executed in **test.ml**
 
-    * **test.ml**: execution of tests' implementation from library.ml
+    * **test.ml**: execution of tests' implementation from **library.ml**
 
 ## <a name="environment">Environment
 
@@ -155,7 +151,7 @@ let update ((r:'a store),(l:loc),(e:'a)) =
 
 ## <a name="parser">Parser
 
-A string will be converted in an expression, command, an expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.
+A string will be converted in an expression, command, expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.
 
 #### parseExp
 
@@ -480,9 +476,7 @@ let rec parseCom s =
 		semcl(comList,r,s,t)
 ```
 
-Look at here below for the details of parseCom.  
-
-If the reflect try to modify existing values in the store, as written before, our dynamic controll look into the taint of these values. The original fuction called update in the store has been modified in order to prevent possible code injection. A new function preupdate has been created. If the value is already in the store and the taint of e is true an exception will be launched.
+If the reflect try to modify existing values in the store, as written before, our dynamic control look into the taint of these values. The original fuction called update in the store has been modified in order to prevent possible code injection. A new function preupdate has been created. If the value is already in the store and the taint of it is true an exception will be launched.
 
 ```
 and preupdate ((r: 'a store),(l: loc),(e: mval)): ('a store) =
@@ -511,7 +505,7 @@ let s1 = semc(Reflect(str),r1,s1,t);;
 
 ```
 val str : string =
-"[Block([],[],\n[While\n(Not\n(Equ\n(\nVal(Den(\"x\")),\nInt(0,false)\n)\n\n),\n[Assign(\nDen(\"y\"),\nProd(\nVal(\nDen(\"y\")\n),\nVal(\nDen(\"x\")\n)\n)\n);\nAssign(\nDen(\"x\"),\nDiff(\nVal(\nDen(\"x\")\n),\nInt(1,true)\n)\n)\n])\n])]\n"
+"[Block([],[],[While(Not(Equ(Val(Den(\"x\")),Int(0,false))),[Assign(Den(\"y\"),Prod(Val(Den(\"y\")),Val(Den(\"x\"))));Assign(Den(\"x\"),Diff(Val(Den(\"x\")),Int(1,true)))])])]"
 let s1 = semc(Reflect(str),r1,s1,t)
 
 Exception: Domain.Untrusted.
@@ -833,10 +827,10 @@ let et (x,y) =
 ```
 
 ## <a name="credits">Credits
-[Andrea Bazerla]() - VR377556  
+[Andrea Bazerla](https://www.linkedin.com/in/andreabazerla/) - VR377556  
 [Valentina Mantelli]() - VR072986  
 [Lorenzo Bellani]() - VR360742  
 
 ## <a name="license">License
-Copyright © 2017 [Andrea Bazerla]()  
+Copyright © 2017 [Andrea Bazerla](https://www.linkedin.com/in/andreabazerla/)  
 Released under [The MIT License](https://github.com/andreabazerla/interpreter/blob/master/LICENSE.md)

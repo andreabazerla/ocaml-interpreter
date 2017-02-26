@@ -142,10 +142,18 @@ etagtotag(sem(Type(Ref("w")),r4,s5,t4));;
 
 print_endline("\nREFLECT ------------------------------------------------------------------------");;
 
-let d = [("x",Newloc(Int (4, false)));("y",Newloc(Int (1,false))) ] ;;
-let r1, s1 = semdv(d,r,s,t);;
+(*
+let r = emptyenv(Unbound);;
+let s = emptystore(Undefined);;
+let t = emptyenv(Untyped);;
+
+let d = [("x",Newloc(Int(4,false)));("y",Newloc(Int(1,false)))];;
+let r1,s1 = semdv(d,r,s,t);;
 
 let block1 = "[Block([],[],[While(Not(Equ(Val(Den(\"x\")),Int(0,false))),[Assign(Den(\"y\"),Prod(Val(Den(\"y\")),Val(Den(\"x\"))));Assign(Den(\"x\"),Diff(Val(Den(\"x\")),Int(1,true)))])])]";;
+
+let s2 = semc(Reflect(block1),r1,s1,t);;
+*)
 
 let (terminal, remain) = parseExp factorial3;;
 let factorial3 = sem(terminal,r,s,t);;
@@ -154,9 +162,15 @@ let (l1,s1) = allocate (s,Mint(0,false));;
 let r1 = bind (r,"x",Dloc(l1));;
 let t1 = bind (t,"x",Tloc(l1));;
 
-let (l2,s2) = allocate (s,Mint(1,false));;
+let (l2,s2) = allocate (s1,Mint(1,true));;
 let r2 = bind (r1,"y",Dloc(l2));;
 let t2 = bind (t1,"y",Tloc(l2));;
+
+sem(Val(Den("x")),r2,s2,t2);;
+etagtotag(sem(Type(Ref("x")),r2,s2,t2));;
+
+sem(Val(Den("y")),r2,s2,t2);;
+etagtotag(sem(Type(Ref("y")),r2,s2,t2));;
 
 let s3 = semc(Reflect(assign1),r2,s2,t2);;
 

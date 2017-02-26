@@ -43,7 +43,7 @@ let parseParam stringToParse =
                                     then extractParams subString extracted bracket
                                 else extractParams subString (extracted ^ c) bracket
 
-        in extractParams stringToParse "" 0;;
+    in extractParams stringToParse "" 0;;
 
 let parseIde stringToParse =
     let rec parseIde toExtract extracted openQuotes =
@@ -154,119 +154,190 @@ let parseList stringToParse =
 
 let splitListElement stringToParse =
     let rec extractParamList t e o rlist =
-            if String.length t = 0
-             then e :: rlist
-             else
-                let c = String.sub t 0 1 in
+        if String.length t = 0
+            then e :: rlist
+        else
+            let c = String.sub t 0 1 in
                 let l = String.length(t) in
-                let r = String.sub t 1 (l-1) in
-            match c with
-            | ";" -> if o = 0
-                then extractParamList r "" o (e :: rlist)
-                    else extractParamList r (e^c) o rlist
-            | "(" -> extractParamList r (e^c) (o+1) rlist
-            | ")" -> extractParamList r (e^c) (o-1) rlist
-            | _ -> extractParamList r (e^c) o rlist
-in extractParamList stringToParse "" 0 [];;
+                    let r = String.sub t 1 (l-1) in
+                        match c with
+
+                            | ";" ->
+                                if o = 0
+                                    then extractParamList r "" o (e :: rlist)
+                                else extractParamList r (e^c) o rlist
+
+                            | "(" -> extractParamList r (e^c) (o+1) rlist
+
+                            | ")" -> extractParamList r (e^c) (o-1) rlist
+
+                            | _ -> extractParamList r (e^c) o rlist
+
+    in extractParamList stringToParse "" 0 [];;
 
 let rec parseExp s =
     let terminal, terminalRemain = parseTerminal s in
         let params, paramRemain = parseParam terminalRemain in
-        match terminal with
-        | "Char" -> let ide, restide = parseChar params in
-                            let b, restbool = parseBool restide in
-                                Char (ide, b), paramRemain
-        | "Bool" -> let ide, restide = parseBool params in
-                            let b, restbool = parseBool restide in
-                                Bool (ide, b), paramRemain
-        | "String" -> let ide, restide = parseIde params in
-                            let b, restbool = parseBool restide in
-                                String (ide, b), paramRemain
-        | "Tag" -> let exp0, restexp0 = parseExp params in
-                                            Tag(exp0), paramRemain
-        | "Upper" -> let exp0, restexp0 = parseExp params in
-                                            Upper(exp0), paramRemain
-        | "Lower" -> let exp0, restexp0 = parseExp params in
-                                            Lower(exp0), paramRemain
-        | "Len" -> let exp0, restexp0 = parseExp params in
-                                            Len(exp0), paramRemain
-        | "Get" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Get(exp0, exp1), paramRemain
-        | "Set" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                    let exp2, restexp2 = parseExp restexp1 in
-                                            Set(exp0, exp1, exp2), paramRemain
-        | "Contains" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Contains (exp0, exp1), paramRemain
-        | "Sub" ->let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                    let exp2, restexp2 = parseExp restexp1 in
-                                            Sub(exp0, exp1, exp2), paramRemain
-        | "Concat" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Concat (exp0, exp1), paramRemain
-        | "Diff" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Diff(exp0, exp1), paramRemain
-        | "Appl" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExpList restexp0 in
-                                            Appl(exp0, exp1), paramRemain
-        | "Prod" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Prod(exp0, exp1), paramRemain
-        | "Sum" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Sum(exp0, exp1), paramRemain
-        | "Div" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Div(exp0, exp1), paramRemain
-        | "Int" ->
-            let ide, restide = parseInt params in
-                let b, restbool = parseBool restide in
-                    Int(int_of_string(ide), b), paramRemain
+            match terminal with
 
-        | "Not" -> let exp0, restexp0 = parseExp params in
-                            Not(exp0), paramRemain
-        | "Or" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Or (exp0, exp1), paramRemain
-        | "And" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            And (exp0, exp1), paramRemain
-        | "Den" -> let ide, restide = parseIde params in
-                                Den(ide), paramRemain
-        | "Equ" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                            Equ(exp0, exp1), paramRemain
-        | "Minus" -> let exp0, restexp0 = parseExp params in
-                                            Minus(exp0), paramRemain
-        | "IfThenElse" -> let exp0, restexp0 = parseExp params in
-                                let exp1, restexp1 = parseExp restexp0 in
-                                    let exp2, restexp2 = parseExp restexp1 in
-                                            IfThenElse(exp0, exp1, exp2), paramRemain
-        | "Iszero" -> let exp0, restexp0 = parseExp params in
-                                            Iszero(exp0), paramRemain
-        | "Fun" -> let ides, restide = parseIdeList params in
+                | "Char" ->
+                    let ide, restide = parseChar params in
+                        let b, restbool = parseBool restide in
+                            Char (ide, b), paramRemain
+
+                | "Bool" ->
+                    let ide, restide = parseBool params in
+                        let b, restbool = parseBool restide in
+                            Bool (ide, b), paramRemain
+
+                | "String" ->
+                    let ide, restide = parseIde params in
+                        let b, restbool = parseBool restide in
+                            String (ide, b), paramRemain
+
+                | "Tag" ->
+                    let exp0, restexp0 = parseExp params in
+                        Tag(exp0), paramRemain
+
+                | "Upper" ->
+                    let exp0, restexp0 = parseExp params in
+                        Upper(exp0), paramRemain
+
+                | "Lower" ->
+                    let exp0, restexp0 = parseExp params in
+                        Lower(exp0), paramRemain
+
+                | "Len" ->
+                    let exp0, restexp0 = parseExp params in
+                        Len(exp0), paramRemain
+
+                | "Get" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Get(exp0, exp1), paramRemain
+
+                | "Set" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            let exp2, restexp2 = parseExp restexp1 in
+                                Set(exp0, exp1, exp2), paramRemain
+
+                | "Contains" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Contains (exp0, exp1), paramRemain
+
+                | "Sub" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            let exp2, restexp2 = parseExp restexp1 in
+                                Sub(exp0, exp1, exp2), paramRemain
+
+                | "Concat" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Concat (exp0, exp1), paramRemain
+
+                | "Diff" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Diff(exp0, exp1), paramRemain
+
+                | "Appl" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExpList restexp0 in
+                            Appl(exp0, exp1), paramRemain
+
+                | "Prod" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Prod(exp0, exp1), paramRemain
+
+                | "Sum" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Sum(exp0, exp1), paramRemain
+
+                | "Div" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Div(exp0, exp1), paramRemain
+
+                | "Int" ->
+                    let ide, restide = parseInt params in
+                        let b, restbool = parseBool restide in
+                            Int(int_of_string(ide), b), paramRemain
+
+                | "Not" ->
+                    let exp0, restexp0 = parseExp params in
+                        Not(exp0), paramRemain
+
+                | "Or" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Or (exp0, exp1), paramRemain
+
+                | "And" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            And (exp0, exp1), paramRemain
+
+                | "Den" ->
+                    let ide, restide = parseIde params in
+                        Den(ide), paramRemain
+
+                | "Equ" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            Equ(exp0, exp1), paramRemain
+
+                | "Minus" ->
+                    let exp0, restexp0 = parseExp params in
+                        Minus(exp0), paramRemain
+
+                | "IfThenElse" ->
+                    let exp0, restexp0 = parseExp params in
+                        let exp1, restexp1 = parseExp restexp0 in
+                            let exp2, restexp2 = parseExp restexp1 in
+                                IfThenElse(exp0, exp1, exp2), paramRemain
+
+                | "Iszero" ->
+                    let exp0, restexp0 = parseExp params in
+                        Iszero(exp0), paramRemain
+
+                | "Fun" ->
+                    let ides, restide = parseIdeList params in
                         let exp1, restexp1 = parseExp restide in
-                                Fun(ides, exp1), paramRemain
-        | "Rec" -> let ide, restide = parseIde params in
+                            Fun(ides, exp1), paramRemain
+
+                | "Rec" ->
+                    let ide, restide = parseIde params in
                         let exp1, restexp1 = parseExp restide in
-                                Rec(ide, exp1), paramRemain
-        | "Let" -> let ide, restide = parseIde params in
+                            Rec(ide, exp1), paramRemain
+
+                | "Let" ->
+                    let ide, restide = parseIde params in
                         let exp1, restexp1 = parseExp restide in
                             let exp2, restexp2 = parseExp restexp1 in
-                                    Let(ide, exp1, exp2), paramRemain
-        | "Val" -> let exp0, restexp0 = parseExp params in
-                            Val(exp0), paramRemain
-        | "Ref" -> let ide, restide = parseIde params in
-                                Ref(ide), paramRemain
-        | "Type" -> let exp0, restexp0 = parseExp params in
-                                            Type(exp0), paramRemain
-        | "Newloc" -> let exp0, restexp0 = parseExp params in
-                                            Newloc(exp0), paramRemain
-        | _ -> failwith ("unhandled exp: " ^ terminal)
+                                Let(ide, exp1, exp2), paramRemain
+
+                | "Val" ->
+                    let exp0, restexp0 = parseExp params in
+                        Val(exp0), paramRemain
+
+                | "Ref" ->
+                    let ide, restide = parseIde params in
+                        Ref(ide), paramRemain
+
+                | "Type" ->
+                    let exp0, restexp0 = parseExp params in
+                        Type(exp0), paramRemain
+
+                | "Newloc" ->
+                    let exp0, restexp0 = parseExp params in
+                        Newloc(exp0), paramRemain
+
+                | _ -> failwith ("Unhandled expression: " ^ terminal)
 
 
 and parseExpList stringToParse =

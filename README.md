@@ -5,7 +5,7 @@
 
 * [Project](#project)
 * [Files](#files)
-* [Environment](#enviroment)
+* [Environment](#environment)
 * [Storage](#torage)
 * [Reflect](#reflect)
 * [Parser](#parser)
@@ -18,8 +18,8 @@
 ![blueprint](https://raw.githubusercontent.com/andreabazerla/interpreter/master/doc/img/blueprint.png?token=AOHqU6dXQ8j7Tf9XbS_0spy8CWC3X38Zks5YvDCgwA%3D%3D)
 
 Our interpreter is written in Ocaml, characterized with an operational semantic and includes functions, block and procedures.
-We have a dynamic enviroment and a static environment. In our dymamic enviroment we associate identifiers with denotable values, in the static enviroment we associate a boolean value (true,false) with the type Tainted or Untainted.
-We use in our enviroment a static scoping,this means that in each point of the program the enviroment is identified by the lessical structures of the code.
+We have a dynamic environment and a static environment. In our dymamic environment we associate identifiers with denotable values, in the static environment we associate a boolean value (true,false) with the type Tainted or Untainted.
+We use in our environment a static scoping,this means that in each point of the program the environment is identified by the lessical structures of the code.
 In our dynamic domain each eval, dval, mval and tval type is a tuple: the first element is the value, the second is a boolean. If the last is true, the element is tainted, otherwise it is untainted.
 
 The new environment gives the possibility to make static analysis on the code of the interpreter.

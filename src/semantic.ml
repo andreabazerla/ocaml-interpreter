@@ -30,11 +30,10 @@ let rec sem ((e:exp),(r:dval env),(s:mval store),(t:tval env)) =
 		| IfThenElse (x,y,z) ->
 			let f = sem(x,r,s,t) in
 				if (typecheck("bool",f) || typecheck("int",f))
-					then (
+					then
 						if (f = Ebool(true,false) || f = Ebool(true,true))
 							then sem(y,r,s,t)
 						else sem(z,r,s,t)
-					)
 				else
 					failwith ("Error: nonboolean guard")
 
@@ -101,7 +100,7 @@ and semc ((c:com),(r:dval env),(s:mval store),(t:tval env)) =
 			let (v1,s1) =
 				semden(e1,r,s,t) in (
 					match v1 with
-						| Dloc(n) 	-> preupdate(s1,n,evaltomval(sem(e2,r,s,t)))
+						| Dloc(n) 	-> update(s1,n,evaltomval(sem(e2,r,s,t)))
 						| _			-> failwith ("Error: wrong location in assignment")
 				)
 
@@ -220,9 +219,5 @@ and liststorage s =
 		let l = applystore (s,i) in
 			match l with
 	 			| Undefined -> li
-				| _ -> let ll = mvaltobool l in scan s (ll :: li) (i + 1);
-	in scan s [] 0
-
-let rec print_list = function
-	| [] -> ()
-	| e::l -> let ll = Pervasives.string_of_bool e in print_string ll; print_list l
+				| _ -> scan s (l :: li) (i + 1)
+		in scan s [] 0

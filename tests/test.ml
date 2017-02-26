@@ -166,16 +166,28 @@ let (l2,s2) = allocate (s1,Mint(1,true));;
 let r2 = bind (r1,"y",Dloc(l2));;
 let t2 = bind (t1,"y",Tloc(l2));;
 
-sem(Val(Den("x")),r2,s2,t2);;
-etagtotag(sem(Type(Ref("x")),r2,s2,t2));;
+let (l3,s3) = allocate (s2,Mint(2,false));;
+let r3 = bind (r2,"z",Dloc(l3));;
+let t3 = bind (t2,"z",Tloc(l3));;
 
-sem(Val(Den("y")),r2,s2,t2);;
-etagtotag(sem(Type(Ref("y")),r2,s2,t2));;
+sem(Val(Den("x")),r3,s3,t3);;
+etagtotag(sem(Type(Ref("x")),r3,s3,t3));;
 
-let s3 = semc(Reflect(assign1),r2,s2,t2);;
+sem(Val(Den("y")),r3,s3,t3);;
+etagtotag(sem(Type(Ref("y")),r3,s3,t3));;
 
-sem(Val(Den("x")),r2,s3,t2);;
-etagtotag(sem(Type(Ref("x")),r2,s3,t2));;
+sem(Val(Den("z")),r3,s3,t3);;
+etagtotag(sem(Type(Ref("z")),r3,s3,t3));;
 
-sem(Val(Den("y")),r2,s3,t2);;
-etagtotag(sem(Type(Ref("y")),r2,s3,t2));;
+let s4 = semc(Reflect(assign1),r3,s3,t3);;
+
+sem(Val(Den("x")),r3,s4,t3);;
+etagtotag(sem(Type(Ref("x")),r3,s4,t3));;
+
+sem(Val(Den("y")),r3,s4,t3);;
+etagtotag(sem(Type(Ref("y")),r3,s4,t3));;
+
+sem(Val(Den("z")),r3,s4,t3);;
+etagtotag(sem(Type(Ref("z")),r3,s4,t3));;
+
+print_endline("\nETVOILAAAAA");;

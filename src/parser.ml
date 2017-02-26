@@ -342,15 +342,14 @@ let rec parseExp s =
 
 and parseExpList stringToParse =
     let explist, remainExplist = parseList stringToParse in
-    let rec parseExps (toExtract : string) (extracted : exp list) =
-        if String.trim toExtract = ""
-        then
-            extracted
-        else
-            let parsed, remain = parseExp toExtract in
-                parseExps remain ( parsed :: extracted)
-    in parseExps explist [], remainExplist
-
+        let rec parseExps (toExtract : string) (extracted : exp list) =
+            if String.trim toExtract = ""
+            then
+                extracted
+            else
+                let parsed, remain = parseExp toExtract in
+                    parseExps remain (parsed :: extracted)
+            in parseExps explist [], remainExplist
 
 let parseStringIdexExp stringToParse =
     let ide, remain0 = parseIde stringToParse in

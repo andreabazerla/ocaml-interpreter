@@ -29,7 +29,7 @@ Through the parser the string is evaluated in order to recreate the command list
 If the reflect try to modify existing values in the store, our dynamic controll look into the taint of these values.
 If there are some tainted values an exception will be launched and the program will be terminated.
 
-## Files
+## <a name="files">Files
 
 * **/src/**: source code of interpreter
 
@@ -55,7 +55,7 @@ If there are some tainted values an exception will be launched and the program w
 
     * **test.ml**: execution of tests' implementation from library.ml
 
-## Environment
+## <a name="environment">Environment
 
 Exception of wrong bind list of `bindlist`
 ```
@@ -98,7 +98,7 @@ let rec bindlist (r,il,el) =
 		| _ -> raise WrongBindList
 ```
 
-## Storage
+## <a name="storage">Storage
 
 Function created to apply a new storage.
 ```
@@ -153,7 +153,7 @@ let update ((r:'a store),(l:loc),(e:'a)) =
 		else applystore(r,lu)
 ```
 
-## Parser
+## <a name="parser">Parser
 
 A string will be converted in an expression, command, an expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.
 
@@ -459,7 +459,7 @@ and parseComList stringToParse =
 
 ```
 
-## Reflect
+## <a name="reflect">Reflect
 
 Reflect is a command that takes as input a string that contains a command list. Through the parser, the string is evaluated in order to recreate the command list.  
 
@@ -517,7 +517,7 @@ let s1 = semc(Reflect(str),r1,s1,t)
 Exception: Domain.Untrusted.
 ```
 
-## Taint Analysis
+## <a name="taint-analysis">Taint Analysis
 
 An expression, command or a declaration between a tainted and an untainted input, returns an untainted output if the result is indipendent by the tainted input. Otherwise, if output depends by a tainted input, it returns a tainted output.  
 
@@ -832,11 +832,11 @@ let et (x,y) =
 	else failwith ("Error: type")
 ```
 
-## Credits
+## <a name="credits">Credits
 [Andrea Bazerla]() - VR377556  
 [Valentina Mantelli]() - VR072986  
 [Lorenzo Bellani]() - VR360742  
 
-## License
+## <a name="license">License
 Copyright © 2017 [Andrea Bazerla]()  
 Released under [The MIT License](https://github.com/andreabazerla/interpreter/blob/master/LICENSE.md)

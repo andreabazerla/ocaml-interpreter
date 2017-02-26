@@ -706,7 +706,7 @@ let equ (x,y) =
 
 #### Sum()
 
-It get as inputs two integer and returns the sum between them as result. If the second integer is 0, result is indipendent by its taint so interpreter return the first integer with its taint; otherwise it returns difference between them with OR operation between their taints.
+It get as inputs two integer and returns the sum between them as result. If one of two integer is equal to 0, the interpreter returns the other addend with its taint as result. Otherwise it returns the sum between them, with OR operation between their taints.
 
 ```
 let sum (x,y) =

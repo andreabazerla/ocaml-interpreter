@@ -13,7 +13,7 @@
 * License
 
 ## Project  
-![]()
+![blueprint](https://raw.githubusercontent.com/andreabazerla/interpreter/master/doc/img/blueprint.png?token=AOHqU6dXQ8j7Tf9XbS_0spy8CWC3X38Zks5YvDCgwA%3D%3D)
 
 Our interpreter is written in Ocaml, characterized with an operational semantic and includes functions, block and procedures.
 We have a dynamic enviroment and a static environment. In our dymamic enviroment we associate identifiers with denotable values, in the static enviroment we associate a boolean value (true,false) with the type Tainted or Untainted.
@@ -833,8 +833,8 @@ let et (x,y) =
 ## Credits
 [Andrea Bazerla]() - VR377556  
 [Valentina Mantelli]() - VR072986  
-[Lorenzo Bellani]() - VR??????  
+[Lorenzo Bellani]() - VR360742  
 
 ## License
 Copyright © 2017 [Andrea Bazerla]()  
-Released under [The MIT License]()
+Released under [The MIT License](https://github.com/andreabazerla/interpreter/blob/master/LICENSE.md)

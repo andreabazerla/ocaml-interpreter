@@ -1,4 +1,3 @@
-# Interpreter
 ## Operational recursive interpreter created in OCaml with operations on strings, parser for reflection and dynamic information control flow through taint analysis.
 
 ## Index
@@ -6,11 +5,11 @@
 * [Project](#project)
 * [Files](#files)
 * [Environment](#environment)
-* [Storage](#torage)
+* [Storage](#storage)
 * [Parser](#parser)
 * [Reflect](#reflect)
 * [Taint Analysis](#taint-analysis)
-* [Credits](#redits)
+* [Credits](#credits)
 * [License](#license)
 
 ## <a name="project"></a>Project  
@@ -21,7 +20,7 @@ Our interpreter is written in Ocaml, characterized with an operational semantic 
 
 The new environment gives the possibility to make static analysis on the code of the interpreter. We have created a parser in order to include in our semantic the command Reflect. This command takes as input a string that contains a command list. Through the parser the string is evaluated in order to recreate the command list. If the reflect try to modify existing values in the store, our dynamic control look into the taint of these values. If there are some tainted values an exception will be launched and the program will be terminated.
 
-## <a name="files">Files
+## <a name="files"></a>Files
 
 * **/src/**: source code of interpreter
 
@@ -47,7 +46,7 @@ The new environment gives the possibility to make static analysis on the code of
 
     * **test.ml**: execution of tests' implementation from **library.ml**
 
-## <a name="environment">Environment
+## <a name="environment"></a>Environment
 
 Exception of wrong bind list of `bindlist`
 ```
@@ -90,7 +89,7 @@ let rec bindlist (r,il,el) =
 		| _ -> raise WrongBindList
 ```
 
-## <a name="storage">Storage
+## <a name="storage"></a>Storage
 
 Function created to apply a new storage.
 ```
@@ -145,7 +144,7 @@ let update ((r:'a store),(l:loc),(e:'a)) =
 		else applystore(r,lu)
 ```
 
-## <a name="parser">Parser
+## <a name="parser"></a>Parser
 
 A string will be converted in an expression, command, expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.
 
@@ -451,7 +450,7 @@ and parseComList stringToParse =
 
 ```
 
-## <a name="reflect">Reflect
+## <a name="reflect"></a>Reflect
 
 Reflect is a command that takes as input a string that contains a command list. Through the parser, the string is evaluated in order to recreate the command list.  
 
@@ -507,7 +506,7 @@ let s1 = semc(Reflect(str),r1,s1,t)
 Exception: Domain.Untrusted.
 ```
 
-## <a name="taint-analysis">Taint Analysis
+## <a name="taint-analysis"></a>Taint Analysis
 
 An expression, command or a declaration between a tainted and an untainted input, returns an untainted output if the result is indipendent by the tainted input. Otherwise, if output depends by a tainted input, it returns a tainted output.  
 
@@ -823,11 +822,11 @@ let et (x,y) =
 	else failwith ("Error: type")
 ```
 
-## <a name="credits">Credits
+## <a name="credits"></a>Credits
 [Andrea Bazerla](https://www.linkedin.com/in/andreabazerla/) - VR377556  
 [Valentina Mantelli]() - VR072986  
 [Lorenzo Bellani]() - VR360742  
 
-## <a name="license">License
+## <a name="license"></a>License
 Copyright © 2017 [Andrea Bazerla](https://www.linkedin.com/in/andreabazerla/)  
 Released under [The MIT License](https://github.com/andreabazerla/interpreter/blob/master/LICENSE.md)

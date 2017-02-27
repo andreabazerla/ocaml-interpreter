@@ -124,4 +124,4 @@ print_endline("\nREFLECT -------------------------------------------------------
 
 let assign1 = "[Assign(Den(\"x\"),Int(1,true));Assign(Den(\"y\"),Int(1,false));Assign(Den(\"z\"),Int(2,true))]";;
 
-let factorial3 = "Let(\"factorial\", Rec(\"factorial\", Fun([\"x\"], IfThenElse(Equ(Den(\"x\"), Int(0,false)), Int(1,false), Prod(Den(\"x\"), Appl(Den(\"factorial\"), [Diff(Den(\"x\"), Int(1,false))]))))), Appl(Den(\"factorial\"), [Int(4,false)]))";;
+let factorial3 = "Let(\"factorial\",Rec(\"factorial\",Fun([\"x\"],IfThenElse(Equ(Den(\"x\"),Int(0,false)),Int(1,false), Prod(Den(\"x\"),Appl(Den(\"factorial\"),[Diff(Den(\"x\"),Int(1,false))]))))),Appl(Den(\"factorial\"),[Int(4,false)]))";;

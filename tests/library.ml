@@ -6,7 +6,7 @@ print_endline("\nLENGTH");;
 let length = Let("length", Fun(["x"], Len(Den("x"))), Appl(Den("length"), [String(welcome,false)]));;
 
 print_endline("\nUPPER");;
-let upper = Let("upper", Fun(["x"], Upper(Den("x"))), Appl(Den("upper"), [String(welcome,false)]));;
+let upper = Let("upper", Fun(["x"], Upper(Den("x"))), Appl(Den("upper"), [String(welcome,true)]));;
 
 print_endline("\nLOWER");;
 let lower = Let("lower", Fun(["x"], Lower(Den("x"))), Appl(Den("lower"), [String(welcome,false)]));;
@@ -17,11 +17,11 @@ let get2 = Let("get2", Fun(["x"], Fun(["y"], Get(Den("x"), Den("y")))), Appl(App
 let get3 = Let("get3", Fun(["x"], Fun(["y"], Get(Den("x"), Den("y")))), Appl(Appl(Den("get3"), [String(welcome,true)]), [Int(0,false)]));;
 
 print_endline("\nSET");;
-let set1 = Let("set1", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set1"), [String(welcome,true)]), [Int(1,false)]), [Char('_',false)]));;
-let set2 = Let("set2", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set2"), [String(welcome,false)]), [Int(3,false)]), [Char('_',true)]));;
-let set3 = Let("set3", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set3"), [String(welcome,false)]), [Int(5,true)]), [Char('_',true)]));;
-let set4 = Let("set4", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set4"), [String(welcome,false)]), [Int(5,false)]), [Char('_',true)]));;
-let set5 = Let("set5", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set5"), [String(welcome,true)]), [Int(5,true)]), [Char('_',false)]));;
+let set1 = Let("set1", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set1"), [String(welcome,false)]), [Int(3,false)]), [Char('_',true)]));;
+let set2 = Let("set2", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set2"), [String(welcome,false)]), [Int(3,true)]), [Char('_',false)]));;
+let set3 = Let("set3", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set3"), [String(welcome,true)]), [Int(3,false)]), [Char('_',false)]));;
+let set4 = Let("set4", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set4"), [String(welcome,false)]), [Int(5,false)]), [Char(' ',true)]));;
+let set5 = Let("set5", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set5"), [String(welcome,true)]), [Int(5,false)]), [Char(' ',false)]));;
 let set6 = Let("set6", Fun(["x"], Fun(["y"], Fun(["z"], Set(Den("x"), Den("y"), Den("z"))))), Appl(Appl(Appl(Den("set6"), [String(welcome,false)]), [Int(999,false)]), [Char('_',false)]));;
 
 print_endline("\nCONTAINS");;
@@ -85,12 +85,15 @@ let prod6 = Let("prod6", Fun(["x"], Fun(["y"], Prod(Den("x"), Den("y")))), Appl(
 print_endline("\nDIV");;
 let div1 = Let("div1", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div1"), [Int(10,false)]), [Int(2,false)]));;
 let div2 = Let("div2", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div2"), [Int(3,false)]), [Int(2,true)]));;
-let div3 = Let("div3", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div3"), [Int(1,false)]), [Int(0,false)]));;
-let div4 = Let("div4", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div4"), [Int(1,false)]), [Int(0,true)]));;
-let div5 = Let("div5", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div5"), [Int(0,false)]), [Int(0,false)]));;
-let div6 = Let("div6", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div6"), [Int(0,false)]), [Int(0,true)]));;
-let div7 = Let("div7", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div7"), [Int(0,true)]), [Int(0,false)]));;
-let div8 = Let("div8", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div8"), [Int(0,true)]), [Int(0,true)]));;
+let div3 = Let("div3", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div3"), [Int(2,false)]), [Int(1,true)]));;
+let div4 = Let("div4", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div4"), [Int(2,true)]), [Int(1,false)]));;
+let div5 = Let("div5", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div5"), [Int(1,false)]), [Int(1,false)]));;
+let div6 = Let("div6", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div6"), [Int(1,false)]), [Int(1,true)]));;
+let div7 = Let("div7", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div7"), [Int(1,true)]), [Int(1,true)]));;
+let div8 = Let("div8", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div8"), [Int(1,false)]), [Int(0,false)]));;
+let div9 = Let("div9", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div9"), [Int(1,false)]), [Int(0,true)]));;
+let div10 = Let("div10", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div10"), [Int(0,false)]), [Int(0,false)]));;
+let div11 = Let("div11", Fun(["x"], Fun(["y"], Div(Den("x"), Den("y")))), Appl(Appl(Den("div11"), [Int(0,false)]), [Int(0,true)]));;
 
 print_endline("\nNOT");;
 let non1 = Let("non1", Fun(["x"], Not(Den("x"))), Appl(Den("non1"), [Bool(false,false)]));;

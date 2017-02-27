@@ -90,13 +90,16 @@ let prod5 = sem(prod5,r,s,t);;
 print_endline("\nDIV");;
 let div1 = sem(div1,r,s,t);;
 let div2 = sem(div2,r,s,t);;
-(* Exception: DivisionByZero
 let div3 = sem(div3,r,s,t);;
 let div4 = sem(div4,r,s,t);;
 let div5 = sem(div5,r,s,t);;
 let div6 = sem(div6,r,s,t);;
 let div7 = sem(div7,r,s,t);;
+(*
 let div8 = sem(div8,r,s,t);;
+let div9 = sem(div9,r,s,t);;
+let div10 = sem(div10,r,s,t);;
+let div11 = sem(div11,r,s,t);;
 *)
 
 print_endline("\nNOT");;

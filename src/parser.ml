@@ -373,7 +373,8 @@ let rec parseCom s =
                     let exp0, restexp0 = parseExp params in
                         let comlist1, restcomlist1 = parseComList restexp0 in
                             let comlist2, restcomlist2 = parseComList restcomlist1 in
-                                                CIfThenElse(exp0,comlist1,comlist2), restcomlist2
+                                CIfThenElse(exp0,comlist1,comlist2), restcomlist2
+
                 | "Block" ->
                     let str0, remain0 = parseList params in
                         let str1, remain1 = parseList remain0 in
@@ -406,4 +407,4 @@ and parseComList stringToParse =
             else
                 let parsed, remain = parseCom toExtract in
                     parseCommands remain (parsed :: extracted)
-            in parseCommands comList [], remain
+        in parseCommands comList [], remain

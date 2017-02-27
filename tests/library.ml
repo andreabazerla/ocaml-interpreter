@@ -115,7 +115,7 @@ print_endline("\nFACTORIAL -----------------------------------------------------
 
 let factorial = Let("factorial", Rec("factorial", Fun(["x"], IfThenElse(Equ(Den("x"), Int(0,false)), Int(1,false), Prod(Den("x"), Appl(Den("factorial"), [Diff(Den("x"), Int(1,false))]))))), Appl(Den("factorial"), [Int(4,false)]));;
 
-let factorial2 = [While(Not(Equ(Val(Den("z")), Int(0,false))), [Assign(Den("w"), Prod(Val(Den("w")), Val(Den("z")))); Assign(Den("z"), Diff(Val(Den("z")), Int(1,false)))])];;
+let factorial2 = [While(Not(Equ(Val(Den("z")), Int(0,false))), [Assign(Den("y"), Prod(Val(Den("y")), Val(Den("z")))); Assign(Den("z"), Diff(Val(Den("z")), Int(1,false)))])];;
 
 print_endline("\nREFLECT ------------------------------------------------------------------------");;
 

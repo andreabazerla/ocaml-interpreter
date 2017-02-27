@@ -129,16 +129,16 @@ let r3 = bind (r,"z",Dloc(l3));;
 let t3 = bind (t,"z",Tloc(l3));;
 
 let (l4,s4) = allocate (s3,Mint(1,false));;
-let r4 = bind (r3,"w",Dloc(l4));;
-let t4 = bind (t3,"w",Tloc(l4));;
+let r4 = bind (r3,"y",Dloc(l4));;
+let t4 = bind (t3,"y",Tloc(l4));;
 
 let s5 = semcl(factorial2,r4,s4,t4);;
 
 sem(Val(Den("z")),r4,s5,t4);;
 etagtotag(sem(Type(Ref("z")),r4,s5,t4));;
 
-sem(Val(Den("w")),r4,s5,t4);;
-etagtotag(sem(Type(Ref("w")),r4,s5,t4));;
+sem(Val(Den("y")),r4,s5,t4);;
+etagtotag(sem(Type(Ref("y")),r4,s5,t4));;
 
 print_endline("\nREFLECT ------------------------------------------------------------------------");;
 

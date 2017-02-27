@@ -106,22 +106,20 @@ and semc ((c:com),(r:dval env),(s:mval store),(t:tval env)) =
 
 		| CIfThenElse(e,cl1,cl2) ->
 			let f = sem(e,r,s,t) in
-				if typecheck("bool",f) then
-					(
-						if f = Ebool(true,false)
+				if typecheck("bool",f)
+					then
+						if (f = Ebool(true,false) || f = Ebool(true,true))
 							then semcl(cl1,r,s,t)
-						else if (f = Ebool(true,true))
-							then raise Untrusted
 						else semcl(cl2,r,s,t)
-					)
 				else failwith ("Error: nonboolean guard")
 
 		| While(e,cl) ->
 			let f = sem(e,r,s,t) in
-				if typecheck("bool",f) then
-					(if (f = Ebool(true,false) || f = Ebool(true,true))
-						then semcl((cl @ [While(e,cl)]),r,s,t)
-					else s)
+				if typecheck("bool",f)
+					then
+						if (f = Ebool(true,false) || f = Ebool(true,true))
+							then semcl((cl @ [While(e,cl)]),r,s,t)
+						else s
 				else failwith ("Error: nonboolean guard")
 
 		| Block(b) -> semb(b,r,s,t)

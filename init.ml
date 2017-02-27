@@ -16,7 +16,7 @@ print_endline("\nINTERPRETER ###################################################
 #use "src/semantic.ml";;
 
 print_endline("\nLIBRARY ########################################################################\n");;
-#use "test/library.ml";;
+#use "tests/library.ml";;
 
 print_endline("\nTEST ###########################################################################\n");;
-#use "test/test.ml";;
+#use "tests/test.ml";;

@@ -17,8 +17,7 @@
 
 ![blueprint](https://raw.githubusercontent.com/andreabazerla/interpreter/master/docs/img/blueprint.png?token=AOHqU_5htwrE48TxWbckA8u9KRw2q1_Gks5YvITYwA%3D%3D)
 
-Our interpreter is written in Ocaml, characterized with an operational semantic and includes functions, block and procedures.
-We have a dynamic enviroment and a static environment. In our dymamic enviroment we associate identifiers with denotable values, in the static enviroment we associate a boolean value (true,false) with the type Tainted or Untainted.
+Our interpreter is written in Ocaml, characterized with an operational semantic and includes functions, block and procedures. We have a dynamic enviroment and a static environment. In our dymamic enviroment we associate identifiers with denotable values, in the static enviroment we associate a boolean value (true,false) with the type Tainted or Untainted.
 We use in our enviroment a static scoping,this means that in each point of the program the enviroment is identified by the lessical structures of the code.
 In our dynamic domain each eval, dval, mval and tval type is a tuple: the first element is the value, the second is a boolean. If the last is true, the element is tainted, otherwise it is untainted.
 
@@ -521,6 +520,7 @@ type eval ==
 	| Eint of int * bool
     ...
 ```
+Then we have created a mirror of `enviroment.ml` for enviroment of types, to isolate taint by values in method to extract them. Infact, to get taint you could use `Ref()`, to get location in storage and converting it from mval to tval, and then `Type()` extracting taint as an eval through a type conversion. Lastly, to get taint as a tag, you could use `evaltotag` conversion out of semantic.
 
 ### Strings
 
@@ -582,7 +582,7 @@ let get (x,y) =
 
 #### Set()
 
-It get as input a string `x`, an int `y` and a char `z` to return the same string `x` updated replacing its char at position `y` with the new char `z`. If string `x` after `Set()` will be the same of that before, then its tait remains the same. Otherwise, if `x` is changed, then will be made a new string through substring operation: you merge two string, the first and the last part, with in the middle the new char `z`. In this last case, will be done an `OR` between taints of string `x` and char `z` to be setted.
+It get as input a string `x`, an int `y` and a char `z` to return the same string `x` updated replacing its char at position `y` with the new char `z`. If string `x` after `Set()` will be the same of that before, then its taint remains the same. Otherwise, if `x` is changed, then will be made a new string through substring operation: you merge two string, the first and the last part, with in the middle the new char `z`. In this last case, will be done an `OR` between taints of string `x` and char `z` to be setted.
 
 ```
 let set (x,y,z) =

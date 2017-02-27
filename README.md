@@ -146,6 +146,30 @@ let update ((r:'a store),(l:loc),(e:'a)) =
 
 ## <a name="parser"></a>Parser
 
+```
+parseComList
+parseList
+parseCom
+parseTerminal
+parseParam
+parseExp
+    parseTerminal
+    parseParam
+parseInt
+parseBool
+```
+
+```
+<function>
+    <ricursion>
+        <terminal, substring>
+            match <terminal>
+                "terminal"
+                    <expression, substring>
+                        Example( , ), remain
+        <application>
+```
+
 A string will be converted in an expression, command, expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.
 
 #### parseExp

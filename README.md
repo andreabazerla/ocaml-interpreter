@@ -53,7 +53,7 @@ Exception of wrong bind list of `bindlist`
 exception WrongBindList
 ```
 
-New polyformic type about environment, that take as input a string, the reference of environment, and return the type of that because an environment can be of different types.
+New polyformic type about environment, that takes as input a string, the identificator and return the correspondant dval, and return the type of that because an environment can be of different types.
 ```
 type 't env =
 	string -> 't
@@ -71,7 +71,7 @@ let applyenv (x,y) =
 	x y
 ```
 
-Bind take as input three parameters to add a new value in environment: if `l` not exists then return `e` else apply `r` to the environment.
+Bind returns a new function, which is the new environment with the association of the new variable.
 ```
 let bind (r,l,e) =
 	function lu ->
@@ -96,7 +96,7 @@ Function created to apply a new storage.
 type loc = int
 ```
 
-New polyformic type about storage, that takes as input a loc, the reference of storage, and returns the type of that because a storage can be of different types.
+New polyformic type that takes as input a loc and returns the correspondent mval.
 ```
 type 't store =
 	loc -> 't
@@ -167,7 +167,7 @@ parseBool
                 "terminal"
                     <expression, substring>
                         Example( , ), remain
-        <application>
+        <application> <params>
 ```
 
 A string will be converted in an expression, command, expressions' list or commands' list through a recursive analysis, character by character, in order to identify the first terminal and its relative parameters. During each search operation, the string is divided in two parts. The first part to which it is associated the semantic meaning and the remaining substring.

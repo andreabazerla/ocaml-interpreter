@@ -136,9 +136,8 @@ and semc ((c:com),(r:dval env),(s:mval store),(t:tval env)) =
 				semcl(comList,r,s,t)
 
 and semb ((dl,rdl,cl),r,s,t) =
-	let (r1,s1) =
-  		semdl((dl,rdl),r,s,t) in
-       		semcl(cl,r1,s1,t)
+  	let (r1,s1) = semdl ((dl,rdl),r,s,t)
+		in semcl (cl,r1,s1,t)
 
 and semdl ((dl,rl),r,s,t) =
 	let (r1,s1) =

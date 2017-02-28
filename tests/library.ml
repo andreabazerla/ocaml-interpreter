@@ -125,3 +125,11 @@ print_endline("\nREFLECT -------------------------------------------------------
 let assign1 = "[Assign(Den(\"x\"),Int(1,true));Assign(Den(\"y\"),Int(1,false));Assign(Den(\"z\"),Int(2,true))]";;
 
 let factorial3 = "Let(\"factorial\",Rec(\"factorial\",Fun([\"x\"],IfThenElse(Equ(Den(\"x\"),Int(0,false)),Int(1,false), Prod(Den(\"x\"),Appl(Den(\"factorial\"),[Diff(Den(\"x\"),Int(1,false))]))))),Appl(Den(\"factorial\"),[Int(4,false)]))";;
+
+let sum7 = "Sum(Int(2,false),Int(0,true))";;
+
+let prod7 = "Prod(Int(2,false),Int(1,true))";;
+
+let upper2 = "Upper(String(\"Hello World\",true))";;
+
+let block1 = Block([("x",Newloc(Int(4,false)));("y",Newloc(Int(1,false)))],[],[While(Not(Equ(Val(Den("x")),Int(0,false))),[Assign(Den("y"),Prod(Val(Den("y")),Val(Den("x"))));Assign(Den("x"),Diff(Val(Den("x")),Int(1,false)))])]);;

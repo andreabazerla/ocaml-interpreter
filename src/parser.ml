@@ -383,6 +383,15 @@ let rec parseCom s =
                                     let ideexplist2 = parseIdexExpList (splitListElement str1) in
                                         Block(ideexplist1, ideexplist2, comList), remain2
 
+                (*
+                | "Block" ->
+                    let str0, remain0 = parseList params in
+                        let str1, remain1 = parseList remain0 in
+                            let comList, remain2 = parseComList remain1 in
+                                let ideexplist1 = parseIdexExpList (splitListElement str0) in
+                                    Block(ideexplist1, comList), remain2
+                *)
+
                 | "While" ->
                     let exp0, restexp0 = parseExp params in
                         let comlist1, restcomlist1 = parseComList restexp0 in

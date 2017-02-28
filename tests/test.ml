@@ -195,4 +195,15 @@ etagtotag(sem(Type(Ref("y")),r3,s4,t3));;
 sem(Val(Den("z")),r3,s4,t3);;
 etagtotag(sem(Type(Ref("z")),r3,s4,t3));;
 
+let (terminal,remain) = parseExp sum7;;
+let sum7 = sem(terminal,r,s,t);;
+
+let (terminal,remain) = parseExp prod7;;
+let prod7 = sem (terminal,r,s,t);;
+
+let (terminal,remain) = parseExp upper2;;
+let upper2 = sem (terminal,r,s,t);;
+
+let s1 = semc(block1,r,s,t);;
+
 print_endline("\nETVOILAAAAA");;

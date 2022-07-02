@@ -173,7 +173,7 @@ let div (x,y) =
 		then
 			match (x,y) with
 				| (Eint(x,a), Eint(y,b)) ->
-					if (x != 0 && y == 0)
+					if (y == 0)
 						then raise DivisionByZero
 					else if (x == 0 && y != 0)
 						then Eint(0,false)
